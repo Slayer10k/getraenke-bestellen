@@ -63,12 +63,12 @@
         getraenk: getraenk
       };
 
-      fetch('https://script.google.com/macros/s/https://script.google.com/u/0/home/projects/1Tth4YBOwjWPjFcDMRxSEbALDsmQ5h8XmhprDRdAY_HKCKg8mEdujzXtK/triggers/exec', {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(daten)
-      });
+fetch('https://script.google.com/macros/s/AKfycbzwlBKic4pdZ5CYiwnvIgQCCQPOm_I_MnOqKc1ekcgXeTc-6iwNpZvtAA3WaagyX5YP/exec', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(daten)
+});
+
 
       document.getElementById("bestaetigung").classList.remove("hidden");
     }
