@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Getränkebestellung</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 2rem;
+      background-color: #f5f5f5;
+    }
+    h1 {
+      color: #333;
+    }
+    button {
+      margin: 10px;
+      padding: 15px 25px;
+      font-size: 18px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Getränke bestellen 🍹</h1>
+  <p id="tisch-anzeige">Tisch: </p>
+
+  <div>
+    <button onclick="sendeBestellung('Cola')">Cola 🥤</button>
+    <button onclick="sendeBestellung('Bier')">Bier 🍺</button>
+    <button onclick="sendeBestellung('Spritzer')">Spritzer 🥂</button>
+    <button onclick="sendeBestellung('Wein')">Wein 🍷</button>
+    <button onclick="sendeBestellung('Wasser')">Wasser 💧</button>
+  </div>
+
+  <p id="bestaetigung" class="hidden">✅ Bestellung gesendet!</p>
+
+  <script>
+    const tisch = new URLSearchParams(window.location.search).get('table');
+    document.getElementById("tisch-anzeige").innerText += tisch;
+
+    function sendeBestellung(getraenk) {
+      if (!tisch) {
+        alert("Tischnummer fehlt!");
+        return;
+      }
+
+      const daten = {
+        timestamp: new Date().toISOString(),
+        tisch: tisch,
+        getraenk: getraenk
+      };
+
+      fetch('https://script.google.com/macros/s/https://script.google.com/u/0/home/projects/1Tth4YBOwjWPjFcDMRxSEbALDsmQ5h8XmhprDRdAY_HKCKg8mEdujzXtK/triggers/exec', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(daten)
+      });
+
+      document.getElementById("bestaetigung").classList.remove("hidden");
+    }
+  </script>
+
+</body>
+</html>
